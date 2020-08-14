@@ -12,18 +12,22 @@
 #include "globals.hpp"
 #include "exhaust.hpp"
 
+Particle particle;
+Player player;
+Exhaust ex(&player);
 
 void setup() {
   arduboy.begin();
   arduboy.setFrameRate(60);
   arduboy.clear();
   arduboy.initRandomSeed();
+  ex.xRoot = &player.xChord;
+  ex.yRoot = &player.yChord;
+  ex.genCounters();
+  ex.genVectors();
    
 }
 
-Particle particle;
-Player player;
-Exhaust ex = Exhaust(player);
 
 //Main loop
 void loop() {
@@ -34,8 +38,7 @@ void loop() {
   arduboy.clear();
 
   player.draw();
-  player.update();
-
+  player.update();          
   ex.update();
   //particle.circles(30,30);
   //particle.update();

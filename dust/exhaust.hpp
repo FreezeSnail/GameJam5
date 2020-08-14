@@ -10,7 +10,7 @@ class Exhaust : Particle{
         uint8_t * xRoot;
         uint8_t * yRoot;
 
-        Exhaust(Player player);
+        Exhaust(Player * player);
 
         void genVectors();
         void genCounters();

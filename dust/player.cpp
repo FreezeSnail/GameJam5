@@ -19,4 +19,21 @@ void Player::draw(){
 void Player::update(){
     this->particle.update();
     draw();
+
+    if(arduboy.pressed(UP_BUTTON)){
+        yChord--;
+    }
+    else if (arduboy.pressed(DOWN_BUTTON)){
+        yChord++;
+    }
+    else if (arduboy.pressed(LEFT_BUTTON)){
+        xChord--;
+    }
+    else if (arduboy.pressed(RIGHT_BUTTON)){
+        xChord++;
+    }
+
+    if(arduboy.justPressed(A_BUTTON))
+        bullet.spawnBullet();
+    bullet.update();
 }

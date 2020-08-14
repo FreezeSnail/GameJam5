@@ -8,44 +8,47 @@ static vect_t genVect(){
     
 }
 
-Exhaust::Exhaust(Player player){
+Exhaust::Exhaust(Player *player){
     genVectors();
     genCounters();
 
-    this->xRoot = &player.xChord + 4;
-    this->yRoot = &player.yChord + 4;
+    this->xRoot = &player->xChord;
+    this->yRoot = &player->yChord;
 
 }
 void Exhaust::genVectors(){
-    for(vect_t vec : this->vectors){
-        vec = genVect();
+    for(uint8_t i = 0; i < 10; i++){
+        this->vectors[i] = genVect();
     }
 }
 
 void Exhaust::genCounters(){
-    for(uint8_t count : this->counters){
-        count = rand() % 5;
+    for(uint8_t i = 0; i < 10; i++){
+        this->counters[i] = rand() % 5;
     }
 }
 
 
 void Exhaust::spray(){
     for(uint8_t i = 0; i < 10; i++){
-        int8_t x = ((this->counters[i] * this->vectors[i].x)) + *this->xRoot;
-        int8_t y = (this->counters[i] * this->vectors[i].y) + *this->yRoot;
-        arduboy.drawPixel(x, y);
+        int8_t x = ((this->counters[i] * this->vectors[i].x)) + *this->xRoot+5;
+        int8_t y = (this->counters[i] * this->vectors[i].y) + *this->yRoot+8;
+        if(rand() % i == 0)
+            arduboy.drawCircle(x,y, (rand() %3));
+        else
+            arduboy.drawPixel(x, y);
        // arduboy.drawPixel(*this->xRoot, *this->yRoot);
       
     }
 }
 
 void Exhaust::update(){
-    arduboy.print(*this->yRoot);
-    for(uint8_t count : this->counters){
-        count++;
+    for(uint8_t i = 0; i < 10; i++){
+        this->counters[i] +=1;
+        
 
-        if(count > 30)
-            count = rand() % 5;
+        if(this->counters[i] > 3)
+            this->counters[i] = rand() % 3;
  
     }
     spray();

@@ -47,7 +47,21 @@ void Bullets::update(){
     }
 }
 
-static Rect getHitbox(Bullet * bullet){
-    return Rect(bullet->xChord, bullet->yChord, 4,2); 
+Rect Bullet::getHitBox(){
+      return Rect(this->xChord, this->yChord, 4,2); 
+  
+} 
 
+void Bullet::draw(){}
+void Bullet::update(){}
+
+
+
+void Bullet::spawnBullet(uint8_t x, uint8_t y){
+    this->xChord = x;
+    this->yChord = y;
+    this->active = 1;
+}
+void Bullet::despawnBullet(){
+    this->active = 0;
 }

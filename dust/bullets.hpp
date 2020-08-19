@@ -5,10 +5,14 @@
 class Bullet : public Collideable{
     public:
         uint8_t active = 0; // 0 or 1;
+        Rect getHitBox();
+        void draw();
+        void update();
+
+        void spawnBullet(uint8_t x, uint8_t y);
+        void despawnBullet();
 
 };
-
-static Rect getHitbox(Bullet * bullet);
 
 class Bullets{
 

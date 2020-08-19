@@ -1,6 +1,5 @@
 #pragma once
 #include "stdint.h"
-#include <avr/pgmspace.h>
 
 #include "collideable.hpp"
 #include "particles.hpp"
@@ -24,5 +23,6 @@ class Player :  public Collideable{
         void update();
         void exhaust(vect_t magnitude);
         void collide(Bullets emBullets[20], Enemy enemys[]);
+        Rect getHitBox();
 
 };

@@ -11,10 +11,12 @@
 #include "player.hpp"
 #include "globals.hpp"
 #include "exhaust.hpp"
+#include "basicEnemy.hpp"
 
 Particle particle;
 Player player;
 Exhaust ex(&player);
+BasicEnemy em;
 
 void setup() {
   arduboy.begin();
@@ -25,6 +27,7 @@ void setup() {
   ex.yRoot = &player.yChord;
   ex.genCounters();
   ex.genVectors();
+  em.spawn();
    
 }
 
@@ -40,8 +43,11 @@ void loop() {
   player.draw();
   player.update();          
   ex.update();
+  em.update();
+  em.collision(&player.bullet);
   //particle.circles(30,30);
   //particle.update();
+  frameCounter++;
 
 
   

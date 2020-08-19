@@ -50,3 +50,8 @@ void Player::collide(Bullets emBullets[20], Enemy enemys[]){
     
     
 }
+
+Rect Player::getHitBox(){
+        return Rect(this->xChord+2, this->yChord+2, 14,14); 
+
+}

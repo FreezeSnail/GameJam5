@@ -6,6 +6,8 @@ class Collideable{
         uint8_t xChord;
         uint8_t yChord;
 
-        Rect getRect();
+        virtual Rect getHitBox();
+        virtual void update();
+        virtual void draw();
 
 };

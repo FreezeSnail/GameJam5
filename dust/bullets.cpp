@@ -1,12 +1,13 @@
 #include "bullets.hpp"
 #include "globals.hpp"
 
-Bullet::Bullet(uint8_t * x, uint8_t * y){
+Bullets::Bullets(uint8_t * x, uint8_t * y){
     this->xOrigin = x;
     this->yOrigin = y;
+    
 }
 
-bullet_t * Bullet::findInactive(){
+Bullet * Bullets::findInactive(){
     for(uint8_t i = 0; i < 10; i++){
         if(bullets[i].active == 0)
             return &bullets[i];
@@ -15,8 +16,8 @@ bullet_t * Bullet::findInactive(){
     return nullptr;
 }
 
-void Bullet::spawnBullet(){
-    bullet_t * active = findInactive();
+void Bullets::spawnBullet(){
+    Bullet * active = findInactive();
     if(active == nullptr){
         return;
     }
@@ -26,16 +27,16 @@ void Bullet::spawnBullet(){
     active->active = 1;
 }
 
-void Bullet::despawnBullet(bullet_t * bullet){
+void Bullets::despawnBullet(Bullet * bullet){
     bullet->active = 0;
 }
 
-void Bullet::draw(bullet_t * bullet){
+void Bullets::draw(Bullet * bullet){
             arduboy.drawCircle(bullet->xChord, bullet->yChord, 2);
             arduboy.drawCircle(bullet->xChord+2, bullet->yChord, 2);
 }
 
-void Bullet::update(){
+void Bullets::update(){
     for(int i = 0; i < 10; i++){
         if(bullets[i].active){
             draw(&bullets[i]);
@@ -44,4 +45,9 @@ void Bullet::update(){
                 despawnBullet(&bullets[i]);
         }
     }
+}
+
+static Rect getHitbox(Bullet * bullet){
+    return Rect(bullet->xChord, bullet->yChord, 4,2); 
+
 }

@@ -10,6 +10,13 @@ void Player::exhaust(vect_t magnitude){
         }
         
 }
+
+Player::Player(){
+    this->xChord = 40;
+    this->yChord = 40;
+}
+
+
 void Player::draw(){
     arduboy.drawBitmap(this->xChord, this->yChord, playerSprt, 16, 16);
     //exhaust({1,2});
@@ -36,4 +43,10 @@ void Player::update(){
     if(arduboy.justPressed(A_BUTTON))
         bullet.spawnBullet();
     bullet.update();
+}
+
+void Player::collide(Bullets emBullets[20], Enemy enemys[]){
+    Rect playerRect = Rect(this->xChord+1, this->yChord+1, 14, 8);
+    
+    
 }

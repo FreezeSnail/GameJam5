@@ -1,28 +1,32 @@
 #pragma once
 #include "globals.hpp"
+#include "collideable.hpp"
 
-typedef struct bullets{
-    uint8_t xChord;
-    uint8_t yChord;
-    uint8_t active = 0; // 0 or 1;
-} bullet_t;
+class Bullet : public Collideable{
+    public:
+        uint8_t active = 0; // 0 or 1;
 
-class Bullet{
+};
+
+static Rect getHitbox(Bullet * bullet);
+
+class Bullets{
 
     public:
-        bullet_t bullets[10];
+        Bullet bullets[10];
         uint8_t * xOrigin;
         uint8_t * yOrigin;
 
-        Bullet(uint8_t * x, uint8_t * y);
+
+        Bullets(uint8_t * x, uint8_t * y);
 
         void spawnBullet();
-        void despawnBullet(bullet_t * bullet);
+        void despawnBullet(Bullet * bullet);
         void update();
-        void draw(bullet_t * bullet);
+        void draw(Bullet * bullet);
 
     private:
-        bullet_t * findInactive();
+        Bullet * findInactive();
 
 
 };

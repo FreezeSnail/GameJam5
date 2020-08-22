@@ -6,15 +6,16 @@
  * 
  */
 #include <stdint.h>
+#include "player.hpp"
 
 #include "particles.hpp"
-#include "player.hpp"
 #include "globals.hpp"
 #include "exhaust.hpp"
 #include "basicEnemy.hpp"
 
 Particle particle;
 Player player;
+Player * playerptr = &player;
 Exhaust ex(&player);
 BasicEnemy em;
 
@@ -45,6 +46,8 @@ void loop() {
   ex.update();
   em.update();
   em.collision(&player.bullet);
+  if(em.bulletHitCheck() == 1) 
+    arduboy.print("HIT");
   //particle.circles(30,30);
   //particle.update();
   frameCounter++;

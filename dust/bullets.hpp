@@ -11,7 +11,7 @@ class Bullet : public Collideable{
 
         void spawnBullet(uint8_t x, uint8_t y);
         void despawnBullet();
-
+        uint8_t hitDetect(Rect playerBox, Rect bulletBox);
 };
 
 class Bullets{

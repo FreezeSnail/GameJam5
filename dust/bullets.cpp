@@ -65,3 +65,11 @@ void Bullet::spawnBullet(uint8_t x, uint8_t y){
 void Bullet::despawnBullet(){
     this->active = 0;
 }
+
+uint8_t Bullet::hitDetect(Rect playerBox, Rect bulletBox){
+    if(arduboy.collide(playerBox, bulletBox))
+        return 1;
+    
+    return 0;
+
+}

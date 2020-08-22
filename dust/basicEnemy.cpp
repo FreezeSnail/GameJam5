@@ -1,6 +1,6 @@
 #include "basicEnemy.hpp"
 #include "globals.hpp"
-
+#include "player.hpp"
 
 void BasicEnemy::spawn(){
     this->active = 1;
@@ -46,12 +46,14 @@ void BasicEnemy::update(){
 
     draw();
     if(frameCounter % 4 == 0){
-        this->xChord -=1;
+        if(this->xChord > 100)
+            this->xChord -=1;
     }
 
     if(frameCounter % 2 == 0)
         updateBullets();
     
+
 }
 
 void BasicEnemy::attack(){
@@ -78,6 +80,22 @@ void BasicEnemy::collision(Bullets * bullet){
             }
         }
     }
+}
+
+Rect BasicEnemy::bulletBox(uint8_t x, uint8_t y){
+    return Rect(x-1, y-1, 2,2);
+}
+
+uint8_t BasicEnemy::bulletHitCheck(){
+    for(uint8_t i = 0; i < 3; i++){
+        Rect bulletHitBox = bulletBox(this->bullet[i].xChord, this->bullet[i].yChord);
+        if(this->bullet[i].hitDetect(playerptr->getHitBox(), bulletHitBox) == 1){
+            this->bullet[i].despawnBullet();
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 

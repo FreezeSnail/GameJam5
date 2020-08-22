@@ -1,0 +1,4 @@
+{
+    "board": "arduboy:avr:arduboy",
+    "sketch": "dust.ino"
+}

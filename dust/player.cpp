@@ -1,5 +1,5 @@
 #include "player.hpp"
-#include "globals.hpp"
+
 
 void Player::exhaust(vect_t magnitude){
         uint8_t r = this->particle.particleClock;

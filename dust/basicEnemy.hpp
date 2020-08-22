@@ -17,7 +17,9 @@ class BasicEnemy : public Enemy{
         void draw();
         void update();
         Rect getHitBox();
+        Rect bulletBox(uint8_t x, uint8_t y);
         void collision(Bullets * bullets);
+        uint8_t bulletHitCheck();
 
     private:
         void updateBullets();
